@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define selenay 10
+int main()
+{
+    int i;
+    int max,min;
+    int dizi[selenay];
+    printf("Lutfen %d kadar deger giriniz\n",selenay);
+    for(i=0;i<selenay;i++)
+    {
+        scanf("%d",&dizi[i]);
+    }
+    for(i=0;i<selenay;i++)
+    {
+        printf("%5d\n",dizi[i]);
+    }
+
+    max=min=dizi[0];
+    for(i=1;i<selenay;i++)
+    {
+        if (dizi[i]>max)
+        {
+            max=dizi[i];
+        }
+        if (dizi[i]<min)
+        {
+            min=dizi[i];
+        }
+
+    }
+    printf("Maximum deger: %d\n",max);
+    printf("Minumum deger: %d\n",min);
+
+    return 0;
+}
