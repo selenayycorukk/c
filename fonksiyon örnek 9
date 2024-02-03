@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void saniyeyecevir(int saniye)
+{
+    int saat,zaman;
+    int dakika,sn,artikzaman;
+
+    saat=saniye/3600;
+    zaman=saniye%3600;
+    dakika=zaman/60;
+    sn=zaman%60;
+    printf("saat:%d dakika:%d saniye:%d",saat,dakika,sn);
+
+}
+
+
+int main()
+{
+    int saniye;
+    printf("Lutfen saniye degerini giriniz\n");
+    scanf("%d",&saniye);
+    saniyeyecevir(saniye);
+
+    return 0;
+}
