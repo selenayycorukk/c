@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    char karakter='c';
+    int integerdegerim=1;
+    float floatsayim=5.43;
+    double doublesayim=23456;
+
+    printf("Karakterim= %c, Karakterimin adresi= %d \n",karakter,&karakter);
+    printf("Integer degerim= %d, Integeremin adresi= %d \n",integerdegerim,&integerdegerim);
+    printf("float degerim= %f, floatimin adresi= %d \n",floatsayim,&floatsayim);
+    printf("Double degerim= %lf, doubemin adresi= %d \n",doublesayim,&doublesayim);
+
+
+    return 0;
+}
