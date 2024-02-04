@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define n 10
+int main()
+{
+    int *selen;
+    int selenay[n];
+    int i,min,max;
+
+
+    printf("%d adet deger giriniz\n",n);
+    for (selen=selenay;selen<selenay+n;selen++)
+    {
+        scanf("%d",selen);
+    }
+
+    max=min=selenay[0];
+    for (selen=selenay+1;selen<selenay+n;selen++)
+    {
+       if(*selen>max)
+       {
+           max=*selen;
+       }
+       if(*selen<min)
+       {
+           min=*selen;
+       }
+    }
+    printf("Dizimizin maksimum degeri: %d\n",max);
+    printf("Dizimizin minimum degeri: %d\n",min);
+
+    return 0;
+}
