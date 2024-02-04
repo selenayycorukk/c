@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int array[100];
+    int size;
+    int toSearch,searchIndex;
+
+    printf("Dizimiz kac elemanli olsun\n");
+    scanf("%d",&size);
+
+    printf("Dizimizin elemanlari\n");
+    bastir(array,size);
+
+    printf("Hangi elemani ariyorsun? \n");
+    scanf("%d",&toSearch);
+
+    searchIndex=ara(array,size,toSearch);
+
+    if (searchIndex== -1)
+    {
+        printf("%d elemani dizinde bulunmuyor.",toSearch);
+    }
+    else
+    {
+        printf("%d elemani %d. pozisyonda bulunuyor",toSearch,searchIndex);
+    }
+
+    return 0;
+}
+
+int ara(int *arr, int size, int toSearch)
+{
+    int index=0;
+
+    int *arrEnd;
+    arrEnd=(arr +size -1);
+
+    while (arr <= arrEnd && *arr!= toSearch) //aradigim sayiyi bulmadigi surece devam edecek
+    {
+        arr++;
+        index++;
+    }
+
+    if (arr<=arrEnd)
+    {
+        return index;
+    }
+
+    return -1;
+}
+
+
+void bastir(int *array, int size)
+{
+    int *arrEnd;
+    arrEnd=(array +size -1); // array in boyutundaki son degeri buluruz
+
+    while (array <= arrEnd)
+    {
+        scanf("%d",array++);
+    }
+
+}
