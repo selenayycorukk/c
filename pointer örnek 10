@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int selen[100],selenay[100];
+    int *sayi1,*sayi2;
+    int n,m;
+    int i;
+
+
+    printf("Ilk dizimizin eleman sayisi (max 50) :\n");
+    scanf("%d",&n);
+    for(sayi1=selen;sayi1<selen+n;sayi1++)
+    {
+        printf("eleman %d :",sayi1-selen);
+        scanf("%d",sayi1);
+    }
+    printf("Ikıncı dizimiizin eleman sayisi: \n");
+    scanf("%d",&m);
+     for(sayi2=selenay;sayi2<selenay+m;sayi2++)
+    {
+        printf("eleman %d : ",sayi2-selenay);
+        scanf("%d",sayi2);
+    }
+
+    printf("Ilk dizimiz : \n");
+    for(i=0;i<n;i++)
+    {
+        printf("%4d",*(selen+i));
+
+    }
+    printf("\nIkinci dizimiz: \n");
+    for(i=0;i<m;i++)
+    {
+        printf("%4d",*(selenay+i));
+    }
+    for(sayi1=selen+n,sayi2=selenay;sayi2<selenay+m;sayi1++,sayi2++)
+    {
+        *sayi1=*sayi2;
+    }
+
+    printf("\nBirlestirmeden sonra: \n");
+    for(i=0;i<n+m;i++)
+    {
+        printf("%4d",*(selen+i));
+    }
+
+    return 0;
+}
