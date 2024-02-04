@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char dizi[100];
+    char eleme;
+    char *selenay;
+
+    printf("Lutfen bir karakter dizisi girin.\n");
+    gets(dizi);
+    printf("Karakter dizisinden cikarnak istdiginiz karakter nedir :\n");
+    scanf("%c",&eleme);
+
+    for(selenay=dizi;*selenay;selenay++)
+    {
+       if(*selenay==eleme)
+       {
+           strcpy(selenay,selenay+1); //cikarmak istedigimiz degeri cikartir
+       }
+    }
+    printf("eleme yapildiktan sonra karakter dizimizin son hali: %s",dizi);
+
+
+    return 0;
+}
