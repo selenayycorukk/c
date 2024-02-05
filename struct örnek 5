@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct zaman {
+int saniye;
+int dakika;
+int saat;
+
+};
+
+void farki(struct zaman t1,struct zaman t2,struct zaman *farkin)
+{
+    if(t2.saniye>t1.saniye)
+    {
+        --t1.dakika; //t1 in dakikasini bir azalt
+        t1.saniye+=60;
+
+    }
+
+    farkin->saniye=t1.saniye-t2.saniye; // fark t1 ve t2 nin içine giriyor.
+    if(t2.dakika>t1.dakika)
+    {
+        --t1.saat;
+        t1.dakika+=60;
+    }
+    farkin->dakika=t1.dakika-t2.dakika;
+    farkin->saat=t1.saat-t2.saat;
+
+}
+
+
+int main()
+{
+    struct zaman t1,t2,fark;
+    printf("Baslangic zamani (saat,dakika,saniye)");
+    scanf("%d %d %d",&t1.saat,&t1.dakika,&t1.saniye);
+
+    printf("Bitis zamani (saat,dakika,saniye)");
+    scanf("%d %d %d",&t2.saat,&t2.dakika,&t2.saniye);
+
+    farki(t1,t2,&fark);
+
+    printf("\nZaman farki: %d %d %d - ",t1.saat,t1.dakika,t1.saniye);
+    printf("%d %d %d ",t2.saat,t2.dakika,t2.saniye);
+    printf("= %d %d %d ",fark.saat,fark.dakika,fark.saniye);
+
+    return 0;
+}
