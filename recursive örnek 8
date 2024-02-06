@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int ussu(int us,int taban)
+{
+    int sonuc;
+    if(us==0)
+    {
+        sonuc=1;
+    }
+    else
+    {
+        sonuc=taban*ussu(us-1,taban);
+    }
+    return sonuc;
+}
+
+int main()
+{
+    int us,taban;
+    printf("Lutfen taban degerini giriniz\n");
+    scanf("%d",&taban);
+    printf("Lutfen us degerini giriniz\n");
+    scanf("%d",&us);
+    printf("%d ussu %d = %d",taban,us,ussu(us,taban));
+    return 0;
+}
