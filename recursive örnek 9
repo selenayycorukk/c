@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void seriolustur(int baslangic,int bitis,int artis)
+{
+    if (baslangic<=bitis)
+    {
+        printf("\n%d",baslangic);
+        seriolustur(baslangic+artis,bitis,artis);
+    }
+
+}
+
+int main()
+{
+    int baslangic,bitis,artis;
+
+    printf("Lutfen bir baslangic degeri giriniz\n");
+    scanf("%d",&baslangic);
+    printf("Lutfen bitis degerini giriniz\n");
+    scanf("%d",&bitis);
+    printf("Lutfen artis degerini giriniz\n");
+    scanf("%d",&artis);
+    seriolustur(baslangic,bitis,artis);
+
+    return 0;
+}
