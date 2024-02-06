@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void sayi_iste()
+{
+    int sayi;
+    printf("Lutfen bir sayi giriniz\n");
+    scanf("%d",&sayi);
+    if(sayi==0)
+    {
+        exit(0);
+    }
+    else
+    {
+        sayi_iste();
+    }
+}
+
+int main()
+{
+    sayi_iste();
+
+    return 0;
+}
