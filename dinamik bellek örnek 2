@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int *p,i,N;
+
+    printf("Kac adet sayi uretilecek\n");
+    scanf("%d",&N);
+    p=(int *)malloc(N*sizeof(int));
+
+    srand(time(0)); // rastgele sayi uretmemizi sagliyor.
+    printf("Uretilen sayilar");
+    for(i=0;i<N;i++)
+    {
+        *(p+i)=rand()%100;
+        printf("%3d",*(p+i));
+    }
+    printf("\n");
+    printf("Kareleri:");
+    for(i=0;i<N;i++)
+    {
+        printf("%4d  ",(*(p+i))*(*(p+i)));
+    }
+
+    return 0;
+}
