@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    FILE *dosya;
+    char satir[100],*karakter;
+
+    dosya=fopen("bilgi.txt","r");
+
+    if(dosya==NULL)
+    {
+        printf("Dosya oluturulamadi.");
+    }
+    else
+    { do
+        {
+         karakter=fgets(satir,100,dosya);
+         if(karakter != NULL)
+         {
+             printf("%s",satir);
+         }
+
+        }
+        while(karakter != NULL);
+
+        fclose(dosya);
+        printf("\n Okuma islemi tamamlandi.");
+    }
+
+
+
+
+    return 0;
+}
