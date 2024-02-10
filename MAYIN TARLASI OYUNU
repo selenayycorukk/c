@@ -1,0 +1,337 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include<string.h>
+#define TABLO_UZUNLUGU 8 //mayin tarlasinin kaca kac matix oldugunu belirttik
+#define NORMAL 7 //mayın sayim
+#define KAZANDIM 1
+#define KAYBETTIM -1
+#define DEVAM 0
+
+//variable global
+int mayintab[TABLO_UZUNLUGU+2][TABLO_UZUNLUGU+2];
+char tab[TABLO_UZUNLUGU+2][TABLO_UZUNLUGU+2];
+int mayin_sayisi,y=0;
+int d_saymasi =0;
+
+//projede kullanilan projeler
+void alttablo_olusturma();
+void tablo_initialize ();
+void alttablo_bastirma();
+void tablo_bastirma();
+void mayinlari_yerlestirme();
+int kazanip_kazanmama();
+void kesfetmek(int satir,int kolon);
+int acma(int satir,int kolon);
+
+
+int main(void)
+{
+    int satir,kolon;
+    int ilerleme;
+    int yeniden;
+    char aksiyon;//hangi harf
+
+    printf("Mayin tarlasi oyunumuza hos geldiniz.\n");
+    alttablo_olusturma();
+    tablo_initialize();
+
+    do
+    {
+        tablo_bastirma();
+        printf("\n");
+        printf("Lutfen su formatta giriniz: c,satir,kolon veya d,satir,kolon veya e,satir,kolon \n");
+        scanf("%c,%d,%d",&aksiyon,&satir,&kolon);
+        printf("\n");
+
+        if(aksiyon == 'c')
+        {
+            ilerleme=acma(satir,kolon);
+        }
+        else if (aksiyon=='d')
+        {
+            if(mayin_sayisi> d_saymasi)
+            {
+                d_saymasi++;
+                tab[satir][kolon]='D';
+                ilerleme = kazanip_kazanmama();
+            }
+        }
+        else if(aksiyon == 'e')
+        {
+            if(d_saymasi>0)
+            {
+                d_saymasi--;
+            }
+            tab[satir][kolon]='#';
+            ilerleme=acma(satir,kolon);
+        }
+        if(ilerleme == KAYBETTIM)
+        {
+            printf("Oyunu Kaybettiniz.\n");
+            alttablo_bastirma();
+            printf("Oyunu yeniden oynamak istiyor musunuz? [1-Evet][0-Hayir]\n");
+            scanf("%d",&yeniden);
+            switch(yeniden)
+            {
+            case 0:
+                printf("Tesekkurler Gorusuruz.\n");
+                return 0;
+                break;
+
+            case 1:
+                    d_saymasi=0;
+                    ilerleme=DEVAM;
+                    alttablo_olusturma();
+                    tablo_initialize();
+                    break;
+                    default:
+                    printf("Yanlis bir deger girdiniz.\n");
+                    break;
+            }
+        }
+        if(ilerleme==KAZANDIM)
+        {
+            printf("Bravo Harika bir is cikardiniz.\n");
+            alttablo_bastirma();
+            printf("Oyunu yeniden oynamak istiyor musunuz? [1-Evet][0-Hayir]\n");
+            scanf("%d",&yeniden);
+            switch(yeniden)
+            {
+                case 0: printf("Tesekkurler Gorusuruz.\n");
+                return 0;
+                break;
+
+                case 1:
+                    d_saymasi=0;
+                    ilerleme=DEVAM;
+                    alttablo_olusturma();
+                    tablo_initialize();
+                    break;
+                    default:printf("Yanlis bir deger girdiniz.\n");
+                    break;
+            }
+        }
+    }
+    while(1);
+
+    return 0;
+}
+
+
+
+
+void alttablo_olusturma()
+{
+    int i,j,mayin_sayisi;
+    for(i=0;i<=TABLO_UZUNLUGU+1;i++)
+    {
+        for(j=0;j<=TABLO_UZUNLUGU;j++)
+        {
+            mayintab[i][j]=0;
+
+        }
+    }
+    for (i=0;i<=TABLO_UZUNLUGU+1;i++)
+    {
+        mayintab[i][0]=1;
+        mayintab[i][TABLO_UZUNLUGU+1]=1;
+    }
+        for(j=0;j<=TABLO_UZUNLUGU;j++)
+        {
+            mayintab[0][j]=1;
+            mayintab[TABLO_UZUNLUGU+1][j]=1;
+        }
+    mayin_sayisi=NORMAL;
+    mayinlari_yerlestirme();
+}
+
+void tablo_initialize()
+{
+    int i,j;
+    for(i=0;i<=TABLO_UZUNLUGU+1;i++)
+    {
+        for(j=0;j<=TABLO_UZUNLUGU;j++)
+        {
+           tab[i][j]='#';
+
+        }
+    }
+    for (i=0;i<=TABLO_UZUNLUGU+1;i++)
+    {
+        tab[i][0]='*';
+        tab[i][TABLO_UZUNLUGU+1]='*';
+    }
+        for(j=0;j<=TABLO_UZUNLUGU;j++)
+        {
+            tab[0][j]='*';
+            tab[TABLO_UZUNLUGU+1][j]='*';
+        }
+}
+
+void tablo_bastirma()
+{
+    int i,j;
+
+     printf("\n");
+
+    for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        printf("%3d",i);
+
+    }
+    printf("\n");
+
+
+    for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        for(j=1;j<=TABLO_UZUNLUGU;j++)
+        {
+            printf("%3c",tab[i][j]);
+        }
+        printf("  |%d",i);
+        printf("\n");
+    }
+   for(i=1;i<=TABLO_UZUNLUGU;i++)
+       printf("---");
+}
+
+void alttablo_bastirma()
+{
+    int i,j;
+    printf("\n");
+   for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        printf("%3d",i);
+
+    }
+    printf("\n");
+    for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        printf("---");
+    }
+     printf("\n");
+
+    for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        for(j=1;j<=TABLO_UZUNLUGU;j++)
+        {
+            printf("%3d",mayintab[i][j]);
+        }
+        printf("  |%d",i);
+        printf("\n");
+    }
+   for(i=1;i<=TABLO_UZUNLUGU;i++)
+       printf("---");
+
+}
+
+void mayinlari_yerlestirme()
+{
+    srand(time(NULL));
+    mayin_sayisi = NORMAL;
+    int i,j,k,p,satir,kolon;
+
+    for(i=1;i<=mayin_sayisi;i++)
+    {
+        satir= 1+rand()%TABLO_UZUNLUGU;
+        kolon=1+rand()%TABLO_UZUNLUGU;
+        if(mayintab[satir][kolon] == -1)
+            i--;
+        mayintab[satir][kolon]=-1;
+
+        for(k=-1;k<=1;k++)
+        {
+            for(p=-1;p<=1;p++)
+            {
+                if(mayintab[i][j]==-1)
+                {
+                    if(mayintab[satir+k][kolon+p] != -1)
+                    {
+                        mayintab[satir+k][kolon+p]++;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+int acma(int satir,int kolon)
+{
+    int x=0;
+
+    if(mayintab[satir][kolon] == -1)
+    {
+        x= KAYBETTIM;
+    }
+    else if(mayintab[satir][kolon] > 0)
+    {
+        tab[satir][kolon]=('0'+mayintab[satir][kolon]);// Aç
+        x=kazanip_kazanmama();
+        x=DEVAM;
+    }
+    else
+    {
+        kesfetmek(satir,kolon);
+    }
+
+    return x;
+}
+
+void kesfetmek(int satir,int kolon)
+{
+    int i,j;
+
+    tab[satir+i][kolon+j]='0'+mayintab[satir+i][kolon+j];
+
+    for(i=-1;i<=1;i++)
+    {
+        for(j=-1;j<=1;j++)
+        {
+            if(mayintab[satir+i][kolon+i] > 0 && tab[satir+i][kolon+j]== '#')
+            {
+                tab[satir+i][kolon+j]='0'+mayintab[satir+i][kolon+j];
+            }
+            else if(mayintab[satir+i][kolon+j]==0 && tab[satir+i][kolon+j]=='#')
+            {
+                kesfetmek(satir+i,kolon+j);
+            }
+        }
+    }
+
+
+}
+int kazanip_kazanmama()
+{
+
+    int i,j;
+    int kontrol;
+
+    for(i=1;i<=TABLO_UZUNLUGU;i++)
+    {
+        for(j=1;j<=TABLO_UZUNLUGU;j++)
+        {
+           if(tab[i][j] == 'D')
+           {
+               if(mayintab[i][j]==-1)
+               {
+                   y++;
+               }
+           }
+        }
+    }
+
+    if(y == NORMAL)
+    {
+        kontrol=KAZANDIM;
+    }
+    else
+    {
+        kontrol=DEVAM;
+    }
+    return kontrol;
+
+
+}
+
