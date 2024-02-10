@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+
+    int satir,sutun;
+    int **matrix; //e * konmasinin sayisi satir ve sutun olarak 2 tane yer ayiriyoruz.
+    int i,j;
+
+    printf("Lutfen satir sayisini giriniz\n");
+    scanf("%d",&satir);
+    printf("Lutfen sutun sayisini giriniz\n");
+    scanf("%d",&sutun);
+
+    matrix=(int **)calloc(satir,sizeof(int *));
+
+    for(i=0;i<satir;i++)
+    {
+        matrix[i]=(int *)calloc(sutun,sizeof(int));
+
+        for(j=0;j<sutun;j++)
+        {
+           printf("Matrix[%d][%d]=",i,j);
+           scanf("%d",&matrix[i][j]);
+        }
+
+    }
+    for(i=0;i<satir;i++)
+    {
+       for(j=0;j<sutun;j++)
+        {
+            printf("%3d ",matrix[i][j]);
+
+        }
+    }
+    return 0;
+}
