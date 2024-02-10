@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void quick_sort(int D[10],int ilk,int son)
+{
+    int gecici;
+    int pivot;
+    int i,j;
+
+    if(ilk<son)
+    {
+        pivot=ilk;
+        i=ilk;
+        j=son;
+        while(i<j)
+        {
+            while(D[i]<=D[pivot] && i<son)
+            {
+                i++;
+            }
+            while(D[j]>D[pivot])
+            {
+                j--;
+            }
+            if(i<j)
+            {
+                gecici=D[i];
+                D[i]=D[j];
+                D[j]=gecici;
+            }
+        }
+        gecici=D[pivot];
+        D[pivot]=D[j];
+        D[j]=gecici;
+
+        quick_sort(D,ilk,j-1);
+        quick_sort(D,j+1,son);
+
+    }
+}
+
+
+int main()
+{
+    int N;
+    int i ;
+
+    printf("Kac adet sayi uretilecek?\n");
+    scanf("%d",&N);
+
+    int dizi[N];
+    printf("Dizi elemanlarini giriniz\n");
+    for(i=0;i<N;i++)
+    {
+        scanf("%d",&dizi[i]);
+    }
+    printf("\nDizi elemanlari\n");
+    for(i=0;i<N;i++)
+    {
+        printf("%d   ",dizi[i]);
+    }
+    quick_sort(dizi,0,N-1);
+
+    printf("\nSiralanmis dizi elemanlari:\n");
+    for(i=0;i<N;i++)
+    {
+        printf("%d   ",dizi[i]);
+    }
+
+    return 0;
+}
